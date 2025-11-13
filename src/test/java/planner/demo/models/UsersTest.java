@@ -7,7 +7,7 @@ public class UsersTest {
 
     @Test
     void testNoArgsConstructorAndSettersGetters() {
-        Users u = new Users();
+        User u = new User();
         assertNull(u.getId());
         assertNull(u.getFirstName());
         assertNull(u.getLastName());
@@ -29,7 +29,7 @@ public class UsersTest {
 
     @Test
     void testAllArgsConstructorAndImmutabilityOfId() {
-        Users u = new Users("Bob", "Jones", "bob@example.com", 99L);
+        User u = new User("Bob", "Jones", "bob@example.com", 99L);
         // id should be null until persisted
         assertNull(u.getId());
         assertEquals("Bob", u.getFirstName());
@@ -51,8 +51,8 @@ public class UsersTest {
 
     @Test
     void testEqualsBehaviorSimple() {
-        Users a = new Users("Sam", "Lee", "sam@example.com", 1L);
-        Users b = new Users("Sam", "Lee", "sam@example.com", 1L);
+        User a = new User("Sam", "Lee", "sam@example.com", 1L);
+        User b = new User("Sam", "Lee", "sam@example.com", 1L);
         // default equals from Object: different instances are not equal
         assertNotEquals(a, b);
         // same instance equals itself (reference equality)

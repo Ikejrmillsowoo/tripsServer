@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Users {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,10 +17,10 @@ public class Users {
     private Long trip_id;
 
     // added no-args constructor required by JPA
-    public Users() {
+    public User() {
     }
 
-    public Users(String firstName, String lastName, String email, Long trip_id) {
+    public User(String firstName, String lastName, String email, Long trip_id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

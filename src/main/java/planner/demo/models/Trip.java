@@ -8,24 +8,24 @@ import jakarta.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
-public class Trips {
+public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
     private String tripName;
-    private Long location_id;
-    private Long user_id;
-    private Long expense_id;
+    private Long locationId;
+    private Long userId;
+    private Long expenseId;
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public Trips(){}
+    public Trip(){}
 
-    public Trips( String tripName, Long location_id, Long user_id, Long expense_id, LocalDate startDate, LocalDate endDate) {
+    public Trip(String tripName, Long locationId, Long userId, Long expenseId, LocalDate startDate, LocalDate endDate) {
         this.tripName = tripName;
-        this.location_id = location_id;
-        this.user_id = user_id;
-        this.expense_id = expense_id;
+        this.locationId = locationId;
+        this.userId = userId;
+        this.expenseId = expenseId;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -46,28 +46,28 @@ public class Trips {
         this.tripName = tripName;
     }
 
-    public Long getLocation_id() {
-        return location_id;
+    public Long getLocationId() {
+        return locationId;
     }
 
-    public void setLocation_id(Long location_id) {
-        this.location_id = location_id;
+    public void setLocationId(Long locationId) {
+        this.locationId = locationId;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Long getExpense_id() {
-        return expense_id;
+    public Long getExpenseId() {
+        return expenseId;
     }
 
-    public void setExpense_id(Long expense_id) {
-        this.expense_id = expense_id;
+    public void setExpenseId(Long expenseId) {
+        this.expenseId = expenseId;
     }
 
     public LocalDate getStartDate() {
