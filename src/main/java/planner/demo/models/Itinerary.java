@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Itenerary {
+public class Itinerary {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,7 +16,10 @@ public class Itenerary {
     private String location;
     private Double totalCost;
 
-    public Itenerary(Long id, String activities, String startTime, String endTime, String location, Double totalCost) {
+    public Itinerary() {
+    }
+
+    public Itinerary(Long id, String activities, String startTime, String endTime, String location, Double totalCost) {
         this.id = id;
         this.activities = activities;
         this.startTime = startTime;
