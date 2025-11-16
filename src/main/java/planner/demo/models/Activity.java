@@ -23,7 +23,7 @@ public class Activity {
     private Trip trip;
 
     @Column(nullable = false)
-    private String day;
+    private Integer day;
 
     @Column(nullable = false)
     private String name;
