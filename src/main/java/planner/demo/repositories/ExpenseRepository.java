@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
-public interface ExpensesRepository extends CrudRepository<Expense, Long> {
+public interface ExpenseRepository extends CrudRepository<Expense, Long> {
     // Find all expenses for a trip
     List<Expense> findByTrip(Trip trip);
 

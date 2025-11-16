@@ -1,42 +1,65 @@
 package planner.demo.services;
 
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import planner.demo.models.User;
 import planner.demo.repositories.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class UserService {
-    @Autowired
-    UserRepository userRepo;
 
-    public User createUser(User user) {
-       userRepo.save(user);
-       return user;
+    private final UserRepository userRepo;
+
+    private final UserRepository userRepository;
+
+    public User findById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
     }
 
-    public User getUserById(Long id) {
-        return userRepo.findById(id).orElse(null);
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
     }
 
-    public List<User> getAllUsers() {
-        return userRepo.findAll();
+    public Optional<User> findByEmailOptional(String email) {
+        return userRepository.findByEmail(email);
     }
-    public User updateUser(Long id, User userDetails) {
-        User user = userRepo.findById(id).orElse(null);
-        if (user != null) {
-            user.setFirstName(userDetails.getFirstName());
-            user.setLastName(userDetails.getLastName());
-            user.setEmail(userDetails.getEmail());
-            user.setTrip_id(userDetails.getTrip_id());
-            userRepo.save(user);
+
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    public User updateUser(Long userId, User updatedUser) {
+        User user = findById(userId);
+
+        if (updatedUser.getName() != null) {
+            user.setName(updatedUser.getName());
         }
-        return user;
+        if (updatedUser.getEmail() != null && !updatedUser.getEmail().equals(user.getEmail())) {
+            if (existsByEmail(updatedUser.getEmail())) {
+                throw new RuntimeException("Email already exists");
+            }
+            user.setEmail(updatedUser.getEmail());
+        }
+
+        return userRepository.save(user);
     }
 
-    public void deleteUser(Long id) {
-        userRepo.deleteById(id);
+    public void deleteUser(Long userId) {
+        User user = findById(userId);
+        userRepository.delete(user);
     }
 }
