@@ -1,6 +1,5 @@
 package planner.demo.exception;
 
-
 import planner.demo.DTO.common.ApiResponse;
 import planner.demo.DTO.common.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;

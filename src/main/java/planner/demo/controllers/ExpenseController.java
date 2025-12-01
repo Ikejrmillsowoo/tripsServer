@@ -1,5 +1,6 @@
 package planner.demo.controllers;
 
+
 import planner.demo.DTO.common.ApiResponse;
 import planner.demo.DTO.expense.CreateExpenseRequest;
 import planner.demo.DTO.expense.ExpenseDTO;
@@ -120,11 +121,13 @@ public class ExpenseController {
                     .collect(Collectors.toSet());
             updatedExpense.setSplitBetween(splitBetween);
         }
+            Expense resExpense = expenseService.updateExpense(expenseId, updatedExpense, currentUser);
+            ExpenseDTO dto = DtoMapper.toExpenseDTO(resExpense);
+//            Expense expense = expenseService.updateExpense(expenseId, updatedExpense, currentUser);
+//            ExpenseDTO dto = DtoMapper.toExpenseDTO(expense);
 
-        Expense resExpense = expenseService.updateExpense(expenseId, updatedExpense, currentUser);
-        ExpenseDTO dto = DtoMapper.toExpenseDTO(resExpense);
+            return ResponseEntity.ok(ApiResponse.success("Expense updated successfully", dto));
 
-        return ResponseEntity.ok(ApiResponse.success("Expense updated successfully", dto));
     }
 
     @DeleteMapping("/{expenseId}")
@@ -132,8 +135,10 @@ public class ExpenseController {
             @PathVariable Long tripId,
             @PathVariable Long expenseId,
             @CurrentUser User currentUser) {
-
+        // return ResponseEntity.ok(ApiResponse.success(null));
         expenseService.deleteExpense(expenseId, currentUser);
-        return ResponseEntity.ok(ApiResponse.success(null));
+
+        return ResponseEntity.ok(ApiResponse.success("Expense deleted successfully", null));
     }
+
 }

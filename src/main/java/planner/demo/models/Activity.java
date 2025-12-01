@@ -2,7 +2,9 @@ package planner.demo.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
@@ -12,6 +14,8 @@ import java.time.LocalTime;
 @Entity
 @Table(name = "activities")
 @Data
+@EqualsAndHashCode(exclude = {"trip"})
+@ToString(exclude = {"trip"})
 @NoArgsConstructor
 public class Activity {
     @Id
